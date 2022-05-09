@@ -1,11 +1,12 @@
 const inquirer = require("inquirer");
 const mysql = require("mysql2");
-const Connection = require("mysql2/typings/mysql/lib/Connection");
+require("console.table")
 const db = mysql.createConnection({
+  host: "localhost",
   user: "root",
-  password: "",
-  database: "employee_db",
-  host: "localhost"
+  password: "Password",
+  database: "employees_db",
+
 })
 
 db.connect(function (err, data) {
@@ -21,8 +22,11 @@ function startApp() {
       message: "Selection",
       choices: ["View Department", "View Roles", "View Employees", "Add Department", "Add Roles", "Add Employees", "Update Employee Roles", "Exit App"]
     }
+
   ]).then(function (response) {
+    console.log(response.userSelection)
     switch (response.userSelection) {
+
       case "View Department":
         viewDepartment();
         break;
@@ -52,9 +56,11 @@ function startApp() {
 }
 
 function viewDepartment() {
-  db.query("SELECT * FROM DEPARTMENT", function (err, data) {
+  console.log("***List of All Departments****")
+  db.query("select * from department", function (err, data) {
     if (err) throw err;
     console.table(data)
+    startApp()
   })
 }
 
@@ -62,6 +68,7 @@ function viewRoles() {
   db.query("SELECT * FROM ROLES", function (err, data) {
     if (err) throw err;
     console.table(data)
+    startApp()
   })
 }
 
@@ -69,5 +76,24 @@ function viewEmployee() {
   db.query("SELECT * FROM EMPLOYEE", function (err, data) {
     if (err) throw err;
     console.table(data)
+    startApp()
+  })
+}
+
+function addDepartment() {
+  console.log("*** Add New Departments****")
+  inquirer.prompt([
+    {
+      type: "input",
+      name: "departmentName",
+      message: "Add new department"
+    }
+
+  ]).then(function (response) {
+    db.query("insert into department(name) values(?)", response.departmentName, function (err, data) {
+      if (err) throw err;
+      console.table(data)
+      startApp()
+    })
   })
 }
