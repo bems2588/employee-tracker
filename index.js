@@ -97,3 +97,39 @@ function addDepartment() {
     })
   })
 }
+
+function addRoles() {
+  console.log("*** Add New Departments****")
+  inquirer.prompt([
+    {
+      type: "input",
+      name: "title",
+      message: "Add new title"
+    },
+    {
+      type: "input",
+      name: "salary",
+      message: "Add salary"
+    },
+    {
+      type: "list",
+      name: "department_id",
+      message: "Add department id",
+      choices: [
+        { name: "production", value: 1 },
+        { name: "marketing", value: 2 },
+        { name: "sales", value: 3 }
+
+      ]
+    }
+
+
+  ]).then(function (response) {
+    db.query("insert into roles(title, salary, department_id) values (?, ?, ?);",
+      [response.title, response.salary, response.department_id], function (err, data) {
+        if (err) throw err;
+        console.table(data)
+        startApp()
+      })
+  })
+}
