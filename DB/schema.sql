@@ -1,20 +1,19 @@
-create database employees_db;
+DROP TABLE IF EXISTS department; 
+DROP TABLE IF EXISTS role;
+DROP TABLE IF EXISTS employee;
 
-use employees_db;
-
-
-create table department(
-  id INT Primary Key auto_increment,
-  name varchar(35)
+CREATE TABLE department(
+  id INT  AUTO_INCREMENTE PRIMARY KEY,
+  name varchar(30) NOT NULL
 );
 
-create table roles(
-  id INT PRIMARY KEY auto_increment,
-  title VARCHAR(30),
-  salary DECIMAL,
+CREATE TABLE role (
+  id INT  AUTO_INCREMENTE PRIMARY KEY,
+  title VARCHAR(30) NOT NULL,
+  salary DECIMAL(10) NOT NULL,
   department_id INT references department(id)
 );
-create table employee(
+CREATE TABLE employee(
   id INT PRIMARY KEY auto_increment,
   first_name VARCHAR(30),
   last_name VARCHAR(30),

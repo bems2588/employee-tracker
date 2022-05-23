@@ -1,16 +1,20 @@
-use employees_db;
-insert into department(name) values("production"), ("marketing"), ("sales");
+/*USE employees_db;*/
 
-insert into roll(title, salary, department_id) values
-("manager", 769879,1);
+INSERT INTO department(name) 
+VALUES
+("Production"),
+("Marketing"),
+("Sales");
 
-insert into roll(title, salary, department_id) values
-("manager", 769879,2);
+INSERT INTO role (title, salary, department_id) 
+VALUES
+  ("Manager", 769879,1),
+  ("Sales Person", 769879,2),
+  ("Marketing Manager", 769879,3);
 
-insert into roll(title, salary, department_id) values
-("manager", 769879,3);
 
-
-insert into employee(first_name, last_name, role_id) values("Bruno", "Marcenaro", 1);
-insert into employee(first_name, last_name, role_id) values("John", "Smith", 2);
-insert into employee(first_name, last_name, role_id) values("Paul", "Scott", 3);
+INSERT INTO employee (first_name, last_name, role_id, manager_id) 
+values
+("Bruno", "Marcenaro", 1, null),
+("John", "Smith", 2, null),
+("Paul", "Scott", 3, 1);
