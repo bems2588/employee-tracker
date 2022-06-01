@@ -125,7 +125,7 @@ function addRoles() {
     }
 
   ]).then(function (response) {
-    db.query("insert into role (title, salary, department_id) values (?, ?, ?);",
+    db.query("insert into roles (title, salary, department_id) values (?, ?, ?);",
       [response.title, response.salary, response.department_id], function (err, data) {
         if (err) throw err;
         console.table(data)
@@ -189,8 +189,8 @@ function updateEmpRoles() {
       message: "Add role id",
       choices: [
         { name: "manager", value: 1 },
-        { name: "manager", value: 2 },
-        { name: "manager", value: 3 }
+        { name: "engineer", value: 2 },
+        { name: "sales person", value: 3 }
 
       ]
     },

@@ -7,8 +7,8 @@ CREATE TABLE department(
   name varchar(30) NOT NULL
 );
 
-CREATE TABLE role (
-  id INT  AUTO_INCREMENTE PRIMARY KEY,
+CREATE TABLE roles (
+  id INT  AUTO_INCREMENT PRIMARY KEY,
   title VARCHAR(30) NOT NULL,
   salary DECIMAL(10) NOT NULL,
   department_id INT references department(id)
